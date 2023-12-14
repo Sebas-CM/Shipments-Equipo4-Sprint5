@@ -3,12 +3,18 @@ package cat.institutmarianao.shipmentsws.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /* Lombok */
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+/* JPA */
+@Entity
 public abstract class Action implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -23,7 +29,8 @@ public abstract class Action implements Serializable {
 	}
 
 	/* Lombok */
-	@EqualsAndHashCode.Include
+	@EqualsAndHashCode.Include	
+	@Id
 	protected Long id;
 
 	protected Type type;
