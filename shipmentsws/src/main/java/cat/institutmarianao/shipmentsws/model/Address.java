@@ -2,12 +2,15 @@ package cat.institutmarianao.shipmentsws.model;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /* Lombok */
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+/* JPA */
+@Entity
 public class Address implements Serializable {
 
 	private static final long serialVersionUID = 1L;
