@@ -5,6 +5,19 @@ import java.util.List;
 
 import org.hibernate.annotations.Formula;
 
+import cat.institutmarianao.shipmentsws.validation.groups.OnShipmentCreate;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Null;
+import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -13,6 +26,9 @@ import lombok.Setter;
 /* Lombok */
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+/* JPA */
+@Entity
+@Table(name = "shipments")
 public class Shipment implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -33,8 +49,20 @@ public class Shipment implements Serializable {
 
 	/* Lombok */
 	@EqualsAndHashCode.Include
+	/* Validation */
+	@Null(groups = OnShipmentCreate.class) // Must be null on inserts
+	@NotNull(groups = OnShipmentCreate.class) // Must be not null on updates
+	/* JPA */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(unique = true, nullable = false)
 	private Long id;
 
+	/* Validation */
+	@NotNull
+	/* JPA */
+	@Enumerated(EnumType.STRING) // Stored as string
+	@Column(nullable = false)
 	private Category category;
 
 	private Address sender;
@@ -49,6 +77,11 @@ public class Shipment implements Serializable {
 	private Boolean express;
 	private Boolean fragile;
 
+	/* Validation */
+	@NotBlank
+	@Size(max = MAX_DESCRIPTION)
+	/* JPA */
+	@Column(nullable = false)
 	private String note;
 
 	private List<Action> tracking;
