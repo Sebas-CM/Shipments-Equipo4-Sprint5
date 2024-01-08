@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.annotations.Formula;
 
 import cat.institutmarianao.shipmentsws.validation.groups.OnShipmentCreate;
+import cat.institutmarianao.shipmentsws.validation.groups.OnShipmentUpdate;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -51,7 +52,7 @@ public class Shipment implements Serializable {
 	@EqualsAndHashCode.Include
 	/* Validation */
 	@Null(groups = OnShipmentCreate.class) // Must be null on inserts
-	@NotNull(groups = OnShipmentCreate.class) // Must be not null on updates
+	@NotNull(groups = OnShipmentUpdate.class) // Must be not null on updates
 	/* JPA */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,16 +66,24 @@ public class Shipment implements Serializable {
 	@Column(nullable = false)
 	private Category category;
 
+	@Null
 	private Address sender;
 
+	@NotNull
 	private Address recipient;
 
+	@NotNull
 	private Float weight;
+	@NotNull
 	private Float height;
+	@NotNull
 	private Float width;
+	@NotNull
 	private Float length;
 
+	@Null
 	private Boolean express;
+	@Null
 	private Boolean fragile;
 
 	/* Validation */
