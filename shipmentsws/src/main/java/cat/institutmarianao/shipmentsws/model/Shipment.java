@@ -7,6 +7,7 @@ import org.hibernate.annotations.Formula;
 
 import cat.institutmarianao.shipmentsws.validation.groups.OnShipmentCreate;
 import cat.institutmarianao.shipmentsws.validation.groups.OnShipmentUpdate;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -17,6 +18,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -98,6 +101,9 @@ public class Shipment implements Serializable {
 	@Column(nullable = false)
 	private String note;
 
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "shipment")
+	@Column(nullable = false)
+	@OrderBy("date DESC")
 	private List<Action> tracking;
 
 	/* Hibernate */
