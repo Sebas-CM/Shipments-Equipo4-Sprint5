@@ -14,6 +14,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -66,10 +67,10 @@ public class Shipment implements Serializable {
 	@Column(nullable = false)
 	private Category category;
 
-	@Null
+	@JoinColumn(name = "sender_id", referencedColumnName = "id", nullable = false)
 	private Address sender;
 
-	@NotNull
+	@JoinColumn(name = "recipient_id", referencedColumnName = "id", nullable = false)
 	private Address recipient;
 
 	@NotNull
