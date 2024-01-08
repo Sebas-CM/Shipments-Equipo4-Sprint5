@@ -19,7 +19,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 /* JPA */
 @Entity
-@Table(name = "adresses")
+@Table(name = "addresses")
 public class Address implements Serializable {
 
 	private static final long serialVersionUID = 1L;
