@@ -10,7 +10,7 @@ import cat.institutmarianao.shipmentsws.exception.NotFoundException;
 import cat.institutmarianao.shipmentsws.model.Office;
 import cat.institutmarianao.shipmentsws.repositories.OfficeRepository;
 import cat.institutmarianao.shipmentsws.services.OfficeService;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 
 @Validated
 @Service
@@ -25,7 +25,7 @@ public class OfficeServiceImpl implements OfficeService {
 	}
 
 	@Override
-	public Office getByOfficeId(@NotBlank Long officeId) {
+	public Office getByOfficeId(@Positive Long officeId) {
 		return officeRepository.findById(officeId).orElseThrow(NotFoundException::new);
 	}
 

@@ -10,7 +10,7 @@ import cat.institutmarianao.shipmentsws.exception.NotFoundException;
 import cat.institutmarianao.shipmentsws.model.Company;
 import cat.institutmarianao.shipmentsws.repositories.CompanyRepository;
 import cat.institutmarianao.shipmentsws.services.CompanyService;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 
 @Validated
 @Service
@@ -25,7 +25,7 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	public Company getByCompanyId(@NotBlank Long companyId) {
+	public Company getByCompanyId(@Positive Long companyId) {
 		return companyRepository.findById(companyId).orElseThrow(NotFoundException::new);
 	}
 
