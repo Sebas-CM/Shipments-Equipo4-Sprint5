@@ -7,26 +7,26 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import cat.institutmarianao.shipmentsws.exception.NotFoundException;
-import cat.institutmarianao.shipmentsws.model.Office;
-import cat.institutmarianao.shipmentsws.repositories.OfficeRepository;
-import cat.institutmarianao.shipmentsws.services.OfficeService;
+import cat.institutmarianao.shipmentsws.model.Company;
+import cat.institutmarianao.shipmentsws.repositories.CompanyRepository;
+import cat.institutmarianao.shipmentsws.services.CompanyService;
 import jakarta.validation.constraints.NotBlank;
 
 @Validated
 @Service
-public class CompanyServiceImpl implements OfficeService {
+public class CompanyServiceImpl implements CompanyService {
 
 	@Autowired
-	private OfficeRepository officeRepository;
+	private CompanyRepository companyRepository;
 
 	@Override
-	public List<Office> findAll() {
-		return officeRepository.findAll();
+	public List<Company> findAll() {
+		return companyRepository.findAll();
 	}
 
 	@Override
-	public Office getByOfficeId(@NotBlank Long officeId) {
-		return officeRepository.findById(officeId).orElseThrow(NotFoundException::new);
+	public Company getByCompanyId(@NotBlank Long companyId) {
+		return companyRepository.findById(companyId).orElseThrow(NotFoundException::new);
 	}
 
 }

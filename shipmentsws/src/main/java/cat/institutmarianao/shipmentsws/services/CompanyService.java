@@ -2,13 +2,13 @@ package cat.institutmarianao.shipmentsws.services;
 
 import java.util.List;
 
-import cat.institutmarianao.shipmentsws.model.Office;
+import cat.institutmarianao.shipmentsws.model.Company;
 import jakarta.validation.constraints.NotBlank;
 
 public interface CompanyService {
 
-	List<Office> findAll();
+	List<Company> findAll();
 
-	Office getByOfficeId(@NotBlank Long officeId);
+	Company getByCompanyId(@NotBlank Long companyId);
 
 }
