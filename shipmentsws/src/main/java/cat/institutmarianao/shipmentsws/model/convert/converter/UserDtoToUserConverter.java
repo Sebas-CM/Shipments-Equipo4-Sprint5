@@ -1,6 +1,7 @@
 package cat.institutmarianao.shipmentsws.model.convert.converter;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
@@ -12,9 +13,17 @@ import cat.institutmarianao.shipmentsws.model.dto.CourierDto;
 import cat.institutmarianao.shipmentsws.model.dto.LogisticsManagerDto;
 import cat.institutmarianao.shipmentsws.model.dto.ReceptionistDto;
 import cat.institutmarianao.shipmentsws.model.dto.UserDto;
+import cat.institutmarianao.shipmentsws.services.CompanyService;
+import cat.institutmarianao.shipmentsws.services.OfficeService;
 
 @Component
 public class UserDtoToUserConverter implements Converter<UserDto, User> {
+
+	@Autowired
+	private OfficeService officeService;
+
+	@Autowired
+	private CompanyService companyService;
 
 	@Override
 	public User convert(UserDto userDto) {
@@ -23,7 +32,8 @@ public class UserDtoToUserConverter implements Converter<UserDto, User> {
 			LogisticsManager logisticsManager = new LogisticsManager();
 			copyCommonProperties(logisticsManagerDto, logisticsManager);
 
-			// TODO Copy office
+			// TODO Copy office (done)
+			logisticsManager.setOffice(officeService.getByOfficeId(logisticsManagerDto.getOfficeId()));
 			logisticsManager.setPlace(logisticsManagerDto.getPlace());
 
 			return logisticsManager;
