@@ -42,7 +42,8 @@ public class UserDtoToUserConverter implements Converter<UserDto, User> {
 			Receptionist receptionist = new Receptionist();
 			copyCommonProperties(receptionistDto, receptionist);
 
-			// TODO Copy office
+			// TODO Copy office (done)
+			receptionist.setOffice(officeService.getByOfficeId(receptionistDto.getOfficeId()));
 			receptionist.setPlace(receptionistDto.getPlace());
 			return receptionist;
 		}
@@ -51,7 +52,8 @@ public class UserDtoToUserConverter implements Converter<UserDto, User> {
 			Courier courier = new Courier();
 			copyCommonProperties(courierDto, courier);
 
-			// TODO Copy company
+			// TODO Copy company (done)
+			courier.setCompany(companyService.getByCompanyId(courierDto.getCompanyId()));
 			return courier;
 		}
 		return null;
