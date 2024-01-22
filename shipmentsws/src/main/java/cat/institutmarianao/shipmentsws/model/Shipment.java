@@ -106,6 +106,9 @@ public class Shipment implements Serializable {
 	@OrderBy("date DESC")
 	private List<Action> tracking;
 
+	/* JPA */
+	@Enumerated(EnumType.STRING)
+	
 	/* Hibernate */
 	@Formula("(SELECT CASE a.type WHEN '" + Action.RECEPTION + "' THEN '" + PENDING + "' " + " WHEN '"
 			+ Action.ASSIGNMENT + "' THEN '" + IN_PROCESS + "' " + " WHEN '" + Action.DELIVERY + "' THEN '" + DELIVERED

@@ -18,8 +18,10 @@ import cat.institutmarianao.shipmentsws.model.Shipment.Category;
 import cat.institutmarianao.shipmentsws.model.Shipment.Status;
 import cat.institutmarianao.shipmentsws.model.User;
 import cat.institutmarianao.shipmentsws.model.User.Role;
+import cat.institutmarianao.shipmentsws.repositories.ActionRepository;
 import cat.institutmarianao.shipmentsws.repositories.ShipmentRepository;
 import cat.institutmarianao.shipmentsws.repositories.UserRepository;
+import cat.institutmarianao.shipmentsws.services.ActionService;
 import cat.institutmarianao.shipmentsws.services.ShipmentService;
 import cat.institutmarianao.shipmentsws.services.UserService;
 import cat.institutmarianao.shipmentsws.specifications.UserWithFullName;
@@ -32,56 +34,14 @@ import jakarta.validation.constraints.NotNull;
 
 @Validated
 @Service
-public class ShipmentServiceImpl implements ShipmentService {
+public class ActionServiceImpl implements ActionService {
 
 	@Autowired
-	private ShipmentRepository shipmentRepository;
+	private ActionRepository actionRepository;
 
 	@Override
-	public List<Shipment> findAll(Status status, String recievedBy, String courierAssigned, Category category,
-			Date from, Date to) {
-		return shipmentRepository.findAll();
-	}
-
-	@Override
-	public List<Shipment> findAllPending(String recievedBy, String courierAssigned, Category category, Date from,
-			Date to) {
-		List<Shipment> pendingShipments = shipmentRepository.findAll().stream().filter(shipments -> from.compareTo(to) < 0).toList();
-		return pendingShipments;
-	}
-
-	@Override
-	public List<Shipment> findAllInProcess(String recievedBy, String courierAssigned, Category category, Date from,
-			Date to) {
-		List<Shipment> inProcessShipments = shipmentRepository.findAll().stream().filter(shipments -> from.compareTo(to) == 0).toList();
-		return inProcessShipments;
-	}
-
-	@Override
-	public Shipment findById(Long shipmentId) {
-		return shipmentRepository.findById(shipmentId).orElseThrow(NotFoundException::new);
-	}
-
-	@Override
-	public List<Action> findTrackingByShipmentId(Long shipmentId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Shipment save(Shipment shipment) {
-		return shipmentRepository.save(shipment);
-	}
-
-	@Override
-	public Action saveAction(Action action) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void deleteById(Long shipmentId) {
-		shipmentRepository.deleteById(shipmentId);
+	public List<Action> findActionsByShipmentId(Long shipmentId) {
+		return actionRepository.findActionsByShipmentIdOrderByDateDesc(shipmentId);
 	}
 
 }
