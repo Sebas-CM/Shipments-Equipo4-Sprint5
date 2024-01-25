@@ -13,17 +13,12 @@ public interface ShipmentService {
 
 	List<Shipment> findAll(Status status, String recievedBy, String courierAssigned, Category category, Date from, Date to);
 
-	List<Shipment> findAllPending(String recievedBy, String courierAssigned, Category category, Date from, Date to);
-	
-	List<Shipment> findAllInProcess(String recievedBy, String courierAssigned, Category category, Date from, Date to);
-	
+	List<Shipment> findByStatus(Status status);
+
+
 	Shipment findById(Long shipmentId);
 	
-	List<Action> findTrackingByShipmentId(Long shipmentId);
-	
 	Shipment save(Shipment shipment);
-	
-	Action saveAction(Action action);
 	
 	void deleteById(Long shipmentId);
 }

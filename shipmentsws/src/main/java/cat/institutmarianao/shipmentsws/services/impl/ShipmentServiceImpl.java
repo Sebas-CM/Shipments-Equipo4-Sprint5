@@ -44,39 +44,19 @@ public class ShipmentServiceImpl implements ShipmentService {
 	}
 
 	@Override
-	public List<Shipment> findAllPending(String recievedBy, String courierAssigned, Category category, Date from,
-			Date to) {
-		List<Shipment> pendingShipments = shipmentRepository.findAll().stream().filter(shipments -> from.compareTo(to) < 0).toList();
-		return pendingShipments;
+	public List<Shipment> findByStatus(Status status) {
+		return shipmentRepository.findAllByStatusOrderById(status);
 	}
 
-	@Override
-	public List<Shipment> findAllInProcess(String recievedBy, String courierAssigned, Category category, Date from,
-			Date to) {
-		List<Shipment> inProcessShipments = shipmentRepository.findAll().stream().filter(shipments -> from.compareTo(to) == 0).toList();
-		return inProcessShipments;
-	}
-
+	
 	@Override
 	public Shipment findById(Long shipmentId) {
 		return shipmentRepository.findById(shipmentId).orElseThrow(NotFoundException::new);
 	}
 
 	@Override
-	public List<Action> findTrackingByShipmentId(Long shipmentId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public Shipment save(Shipment shipment) {
 		return shipmentRepository.save(shipment);
-	}
-
-	@Override
-	public Action saveAction(Action action) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
