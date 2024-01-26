@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import cat.institutmarianao.shipmentsws.model.Shipment;
 import cat.institutmarianao.shipmentsws.model.Shipment.Status;
-import cat.institutmarianao.shipmentsws.model.User;
 
 public interface ShipmentRepository extends JpaRepository<Shipment, Long>, JpaSpecificationExecutor<Shipment> {
 	List<Shipment> findAllByStatusOrderById(Status status);
